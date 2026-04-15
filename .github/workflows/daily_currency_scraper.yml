@@ -1,0 +1,37 @@
+name: Daily Currency Scraper
+
+on:
+  schedule:
+    # Executa todos os dias às 09:00 AM UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Permite execução manual
+
+jobs:
+  scrape-currency:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Run scraper script
+      id: run_scraper
+      run: python valor_scraper.py > currency_rates.json
+
+    - name: Commit and push changes
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add currency_rates.json
+        git commit -m "Update daily currency rates" || echo "No changes to commit"
+        git push

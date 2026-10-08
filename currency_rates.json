@@ -1,8 +1,8 @@
 {
-    "timestamp": "2026-10-07 16:10:45",
+    "timestamp": "2026-10-08 16:11:55",
     "source": "ExchangeRate-API (Calculado Turismo)",
     "currencies": {
-        "dolar_turismo": 5.1792,
-        "euro_turismo": 5.8259
+        "dolar_turismo": 5.2,
+        "euro_turismo": 5.8231
     }
 }
